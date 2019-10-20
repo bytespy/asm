@@ -36,7 +36,7 @@ package org.objectweb.asm;
  *
  * @author Eric Bruneton
  */
-public abstract class ClassVisitor {
+public abstract class ClassVisitor extends MemberVisitor {
 
   /**
    * The ASM API version implemented by this visitor. The value of this field must be one of {@link
@@ -185,6 +185,7 @@ public abstract class ClassVisitor {
    * @return a visitor to visit the annotation values, or {@literal null} if this visitor is not
    *     interested in visiting this annotation.
    */
+  @Override
   public AnnotationVisitor visitAnnotation(final String descriptor, final boolean visible) {
     if (cv != null) {
       return cv.visitAnnotation(descriptor, visible);
@@ -207,6 +208,7 @@ public abstract class ClassVisitor {
    * @return a visitor to visit the annotation values, or {@literal null} if this visitor is not
    *     interested in visiting this annotation.
    */
+  @Override
   public AnnotationVisitor visitTypeAnnotation(
       final int typeRef, final TypePath typePath, final String descriptor, final boolean visible) {
     if (api < Opcodes.ASM5) {
@@ -223,6 +225,7 @@ public abstract class ClassVisitor {
    *
    * @param attribute an attribute.
    */
+  @Override
   public void visitAttribute(final Attribute attribute) {
     if (cv != null) {
       cv.visitAttribute(attribute);
@@ -371,6 +374,7 @@ public abstract class ClassVisitor {
    * Visits the end of the class. This method, which is the last one to be called, is used to inform
    * the visitor that all the fields and methods of the class have been visited.
    */
+  @Override
   public void visitEnd() {
     if (cv != null) {
       cv.visitEnd();

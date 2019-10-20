@@ -46,7 +46,7 @@ package org.objectweb.asm;
  *
  * @author Eric Bruneton
  */
-public abstract class MethodVisitor {
+public abstract class MethodVisitor extends MemberVisitor {
 
   private static final String REQUIRES_ASM5 = "This feature requires ASM5";
 
@@ -137,6 +137,7 @@ public abstract class MethodVisitor {
    * @return a visitor to visit the annotation values, or {@literal null} if this visitor is not
    *     interested in visiting this annotation.
    */
+  @Override
   public AnnotationVisitor visitAnnotation(final String descriptor, final boolean visible) {
     if (mv != null) {
       return mv.visitAnnotation(descriptor, visible);
@@ -160,6 +161,7 @@ public abstract class MethodVisitor {
    * @return a visitor to visit the annotation values, or {@literal null} if this visitor is not
    *     interested in visiting this annotation.
    */
+  @Override
   public AnnotationVisitor visitTypeAnnotation(
       final int typeRef, final TypePath typePath, final String descriptor, final boolean visible) {
     if (api < Opcodes.ASM5) {
@@ -218,6 +220,7 @@ public abstract class MethodVisitor {
    *
    * @param attribute an attribute.
    */
+  @Override
   public void visitAttribute(final Attribute attribute) {
     if (mv != null) {
       mv.visitAttribute(attribute);
@@ -776,6 +779,7 @@ public abstract class MethodVisitor {
    * Visits the end of the method. This method, which is the last one to be called, is used to
    * inform the visitor that all the annotations and attributes of the method have been visited.
    */
+  @Override
   public void visitEnd() {
     if (mv != null) {
       mv.visitEnd();

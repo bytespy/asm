@@ -36,6 +36,7 @@ package org.objectweb.asm;
  * @author Eric Bruneton
  * @deprecated this API is experimental.
  */
+// TODO: extend MemberVisitor when no longer experimental.
 @Deprecated
 public abstract class RecordComponentVisitor {
   /**
