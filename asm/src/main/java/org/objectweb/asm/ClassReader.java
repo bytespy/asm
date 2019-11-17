@@ -2654,8 +2654,9 @@ public class ClassReader {
     Label lbl = bytecodeOffset < labels.length ? labels[bytecodeOffset] : null;
     if (lbl == null) {
       lbl = new Label();
-      if (bytecodeOffset < labels.length)
+      if (bytecodeOffset < labels.length) {
         labels[bytecodeOffset] = lbl;
+      }
     }
     return lbl;
   }
