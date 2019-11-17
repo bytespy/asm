@@ -2651,10 +2651,13 @@ public class ClassReader {
    * @return a non null Label, which must be equal to labels[bytecodeOffset].
    */
   protected Label readLabel(final int bytecodeOffset, final Label[] labels) {
-    if (labels[bytecodeOffset] == null) {
-      labels[bytecodeOffset] = new Label();
+    Label lbl = bytecodeOffset < labels.length ? labels[bytecodeOffset] : null;
+    if (lbl == null) {
+      lbl = new Label();
+      if (bytecodeOffset < labels.length)
+        labels[bytecodeOffset] = lbl;
     }
-    return labels[bytecodeOffset];
+    return lbl;
   }
 
   /**
